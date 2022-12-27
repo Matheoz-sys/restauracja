@@ -5,8 +5,6 @@ class Controller
     protected array $template = [];
     protected string $templateName = "";
 
-    protected array $bodyClasses;
-
     public function __construct($templateName)
     {
         include_once("../config.php");
@@ -23,6 +21,11 @@ class Controller
         $this->template['title'] = $title;
     }
 
+    public function setBodyClass($bodyClass)
+    {
+        $this->template['bodyClass'] = $bodyClass;
+    }
+
     public function render()
     {
         $templateData = $this->template;
@@ -37,7 +40,7 @@ class Controller
     private function insertDocumentBeginning()
     {
         $bodyClass = $this->template['bodyClass'] ?? "";
-        $title = $this->template['title'] . " - " . SITE_NAME ?? SITE_NAME;
+        $title = !empty($this->template['title']) ? $this->template['title'] . " - " . SITE_NAME : SITE_NAME;
         include_once '../Templates/head.php';
     }
 

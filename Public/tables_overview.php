@@ -1,8 +1,8 @@
 <?php
 require_once '../Controller/TablesOverviewController.php';
 ?>
-<main>
 
+<main>
     <div class="tables">
         <?= buildTablesOverviewView($tables); ?>
     </div>
