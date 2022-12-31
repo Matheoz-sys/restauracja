@@ -1,6 +1,6 @@
 <?php
 
-include_once '../config.php';
+include_once __DIR__ . '/../config.php';
 
 /**
  * @Database - Klasa wykorzystująca pattern Singleton, dzięki niej nigdy nie powstanie więcej niż jedno połączenie z bazą danych.
