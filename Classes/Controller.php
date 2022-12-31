@@ -1,6 +1,5 @@
 <?php
 
-include_once __DIR__ . "/../Functions/MainFunctions.php";
 include_once __DIR__ . "/../config.php";
 
 class Controller
@@ -26,12 +25,12 @@ class Controller
     private function insertDocumentBeginning()
     {
         extract($this->template);
-        include_once __DIR__ . "../Templates/head.php";
+        include_once __DIR__ . "/../Templates/head.php";
     }
     
     private function insertBodyStart()
     {
         extract($this->template);
-        include_once __DIR__ . "../Templates/startOfBody.php";
+        include_once __DIR__ . "/../Templates/startOfBody.php";
     }
 }
