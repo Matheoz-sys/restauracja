@@ -19,7 +19,8 @@ class Controller
     public function render()
     {
         $this->insertDocumentBeginning();
-        $this->insertBodyStart();
+        $this->insertBodyBeginning();
+        $this->insertNav();
     }
 
     private function insertDocumentBeginning()
@@ -27,10 +28,16 @@ class Controller
         extract($this->template);
         include_once __DIR__ . "/../Templates/head.php";
     }
-    
-    private function insertBodyStart()
+
+    private function insertBodyBeginning()
     {
         extract($this->template);
         include_once __DIR__ . "/../Templates/startOfBody.php";
+    }
+
+    private function insertNav()
+    {
+        extract($this->template);
+        include_once __DIR__ . "/../Templates/mainNav.php";
     }
 }
