@@ -5,3 +5,6 @@ require_once __DIR__ . '/../../Controller/TableOverviewController.php';
 <main>
 
 </main>
+
+<?php
+Controller::insertHtmlEnd();

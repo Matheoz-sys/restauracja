@@ -15,6 +15,7 @@ function buildTablesOverviewView($tables)
         $html .= "<a href='/restauracja/Public/staff/table_overview.php?id=$tableId' class='table$isOccupiedClass' id='$tableId'>";
         $html .= "<span class='table__number'><i class=\"fa-regular fa-hashtag\"></i> $tableNumber</span>";
         $html .= "<span><i class=\"fa-solid fa-person\"></i> $placesOccupied/$placesTotal</span>";
+        $html .= "<span style=\"width:100%; text-align:center\">Id: $tableId";
         $html .= "</a>";
     }
     return $html;
@@ -25,4 +26,4 @@ $controller->setTitle("Wybór stolików");
 
 $tables = TableModel::findAll();
 
-$controller->render();
+$controller->insertHtmlBeginning();

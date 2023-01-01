@@ -7,16 +7,27 @@ $controller = new Controller();
 
 $table = TableModel::findById($_GET['id']);
 
-$newTable = new TableModel();
+// $newTable = new TableModel();
 
-$idStolika = $table['id'];
+$tableData = $table->getData();
+
+$idStolika = $tableData['id'];
+
 $controller->setTitle("Edycja stolika #$idStolika");
 
-$newTable->dataArr['table_number'] = 8;
-$newTable->dataArr['places_count'] = 4;
-$newTable->dataArr['is_occupied'] = 1;
-$newTable->dataArr['occupied_p1laces_count'] = 2;
+// $newTable->setTableNumber(7);
+// $newTable->setPlacesCount(7);
+// $newTable->setIsOccupied(7);
+// $newTable->setOccupiedPlacesCount(7);
 
-// $newTable->save();
+// $table->setTableNumber(6);
+// $table->setPlacesCount(4);
+// $table->setIsOccupied(1);
+// $table->setOccupiedPlacesCount(2);
 
-$controller->render();
+// dump($table);
+
+// $table->update();
+// $newTable->insert();
+
+$controller->insertHtmlBeginning();
