@@ -7,3 +7,6 @@ require_once __DIR__ . '/../../Controller/TablesManagementOverviewController.php
         <?= buildTablesOverviewView($tables); ?>
     </div>
 </main>
+
+<?php
+Controller::insertHtmlEnd();
