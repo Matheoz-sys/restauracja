@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../Controller/NewDishController.php';
 
 <main>
     <div class="new-dish">
-        <label class="new-dish-label">Nowe Danie</label>
+        <h1>Nowe Danie</h1>
         <table class="new-dish-table">
             <form action="new_dish.php" method="POST">
                 <tr>
@@ -18,6 +18,17 @@ require_once __DIR__ . '/../../Controller/NewDishController.php';
                 <tr>
                     <td>Składniki</td>
                     <td><input type="text" name="DishIngredient" maxlength="250" required/></td>
+                </tr>
+                <tr>
+                    <td>Kategoria</td>
+                    <td>
+                        <select name="DishCategory" required>  
+                            <option>Wybierz z listy</option>
+                            <?php foreach(DishCategoryModel::findAll() as $key) {?>
+                                <option value="<?=$key['id']?>"><?= $key['category_name'] ?></option>
+                            <?php }?>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td>Opis</td>
