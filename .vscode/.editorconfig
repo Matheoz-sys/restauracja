@@ -7,4 +7,4 @@ indent_size = 4
 insert_final_newline = false
 trim_trailing_whitespace = true
 tab_width = 4
-
+ij_html_space_inside_empty_tag = true

@@ -5,8 +5,8 @@ include_once(__DIR__ . '/../Classes/Database.php');
 abstract class Model
 {
     private $dataArr;
-    private $availableMagicMethods;
     private $changedValues;
+    private $availableMagicMethods;
     
     /**
      * Funkcja powinna zwracać nazwę tabeli w bazie danych
@@ -16,29 +16,33 @@ abstract class Model
     public function __construct()
     {
         $dbTableName = static::getTableName();
-        $query = "DESCRIBE $dbTableName";
+        $query = "DESCRIBE $dbTableName";   // Describe - zwraca sktrukture tabeli w db
         $queryResult = mysqli_query(Database::connect(), $query, MYSQLI_USE_RESULT);
         $results = mysqli_fetch_all($queryResult, MYSQLI_ASSOC);
-        // dump($results);
+
         $this->mapValuesToDataArr($results);
-        // dump($this->dataArr);
-        foreach ($this->dataArr as $key => $val) {
-            $this->availableMagicMethods[$key] = self::createSetter($key);
-        }
-        // dump($this->availableMagicMethods);
+        $this->createSetters();
     }
 
-    private static function createSetter($key)
+    private function mapValuesToDataArr($tableDescription): void
     {
-        return "set" . ucfirst(underlinesToCamelCase($key));
+        foreach ($tableDescription as $key => $val) {
+            $dbKey = $val['Field'];
+            $dbValue = $val['Default'];
+
+            $this->dataArr[$dbKey] = $dbValue;
+        }
+    }
+
+    private function createSetters()
+    {
+        foreach ($this->dataArr as $key => $val) {
+            $this->availableMagicMethods[$key] = "set" . ucfirst(underlinesToCamelCase($key));
+        }
     }
 
     public function __call($name, $arguments)
     {
-        // dump($name);
-        // dump($arguments);
-        // dump($this->availableMagicMethods);
-
         $this->isCorrectMethod($name);
 
         $dbKey = array_search($name, $this->availableMagicMethods);
@@ -54,21 +58,6 @@ abstract class Model
 
         if (!in_array($name, $this->availableMagicMethods))
             throw new Error(dump($this) . "Brak takiego settera.");
-    }
-
-    public function getData(): array
-    {
-        return $this->dataArr;
-    }
-
-    private function mapValuesToDataArr($tableDescription): void
-    {
-        foreach ($tableDescription as $key => $val) {
-            $dbKey = $val['Field'];
-            $dbValue = $val['Default'];
-
-            $this->dataArr[$dbKey] = $dbValue;
-        }
     }
 
     public static function findAll(): array
@@ -95,6 +84,7 @@ abstract class Model
         $query = "SELECT * FROM $dbTableName WHERE `id`=$id";
         $queryResult = mysqli_query(Database::connect(), $query);
         $results = mysqli_fetch_assoc($queryResult);
+
         $thisObj = new static();
         $thisObj->dataArr = $results;
         return $thisObj;
@@ -102,11 +92,11 @@ abstract class Model
 
     public function update()
     {
-        if ($this->dataArr['id'] == null) throw new Error(dump($this->dataArr) . "Nie można zaktualizować nieistniejącego rekordu");
+        if (is_null($this->dataArr['id'])) throw new Error(dump($this->dataArr) . "Nie można zaktualizować nieistniejącego rekordu");
 
         $tableName = static::getTableName();
         $query = "UPDATE `$tableName` SET " . self::createUpdateString($this->changedValues) . " WHERE `id` = " . $this->dataArr['id'];
-        dump($query);
+
         mysqli_query(Database::connect(), $query);
     }
 
@@ -128,11 +118,11 @@ abstract class Model
 
     public function insert()
     {
-        if ($this->dataArr['id'] != null) throw new Error(dump($this->dataArr) . "Nie można wstawić istniejącego rekordu - id musi byc null");
+        if (!is_null($this->dataArr['id'])) throw new Error(dump($this->dataArr) . "Nie można wstawić istniejącego rekordu - id musi byc null");
 
         $tableName = static::getTableName();
         $query = "INSERT INTO `$tableName` " . self::createInsertString($this->dataArr);
-        dump($query);
+
         mysqli_query(Database::connect(), $query);
     }
 
@@ -151,4 +141,10 @@ abstract class Model
     public function delete()
     {
     }
+
+    public function getData(): array
+    {
+        return $this->dataArr;
+    }
+
 }
