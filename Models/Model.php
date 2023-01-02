@@ -128,7 +128,7 @@ abstract class Model
 
     public function insert()
     {
-        if ($this->dataArr['id'] == null) throw new Error(dump($this->dataArr) . "Nie można wstawić istniejącego rekordu - id musi byc null");
+        if ($this->dataArr['id'] != null) throw new Error(dump($this->dataArr) . "Nie można wstawić istniejącego rekordu - id musi byc null");
 
         $tableName = static::getTableName();
         $query = "INSERT INTO `$tableName` " . self::createInsertString($this->dataArr);
@@ -142,7 +142,7 @@ abstract class Model
     private static function createInsertString($data)
     {
         $columns = implode(", ", array_keys($data));
-        $escaped_values = array_map(array(Database::connect(), 'mysqli_real_escape_string'), array_values($data));
+        $escaped_values = array_map(array(Database::connect(), 'real_escape_string'), array_values($data));
 
         $values  = implode("', '", $escaped_values);
         return "($columns) VALUES ('$values')";
