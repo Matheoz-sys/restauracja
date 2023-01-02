@@ -139,3 +139,90 @@ a.button {
 .new-dish-table button {
   width: 100%;
 }
+
+.dishes-container {
+  background: white;
+}
+
+.dishes-container-nav {
+  position: sticky;
+  top: 40px;
+  background-color: white;
+  border: 1px solid lightgray;
+  padding: 20px;
+  z-index: 1;
+}
+
+.dishes-container-nav ul {
+  display: inline;
+}
+
+.dishes-container-nav li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.dishes-container-section {
+  scroll-margin-block-start: 100px;
+  background-color: rgb(255, 255, 240);
+}
+
+.dishes-container-section h3 {
+  text-align: center;
+  padding: 10px;
+  margin: auto;
+  font-size: 1.5rem;
+}
+
+.dishes-container-ul {
+  list-style: none;
+}
+
+.dishes-container-li {
+  list-style: none;
+  display: inline;
+}
+
+.dishes-container-meal {
+  position: relative;
+  display: inline-block;
+  background-color: #fff;
+  margin: 10px;
+  height: 400px;
+  width: 320px;
+  padding: 10px;
+  box-shadow: 0px 0px 3px gray;
+  transition: 0.3s;
+  font-style: 1.5rem;
+}
+
+.dishes-container-meal h4,
+.dishes-container-meal p {
+  padding: 5px;
+  margin-bottom: 15px;
+}
+
+.dishes-container-desc {
+  height: 90px;
+}
+
+.dishes-container-meal a {
+  position: absolute;
+  left: 25%;
+  width: 50%;
+  bottom: 20px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: lightgrey;
+  color: black;
+  transition: 0.5s;
+}
+
+.dishes-container-meal a:hover {
+  background-color: gray;
+}
+
+.dishes-container-meal:hover {
+  box-shadow: 0px 0px 5px gray;
+}
