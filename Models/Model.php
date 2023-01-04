@@ -123,7 +123,9 @@ abstract class Model
         $tableName = static::getTableName();
         $query = "INSERT INTO `$tableName` " . self::createInsertString($this->dataArr);
 
-        mysqli_query(Database::connect(), $query);
+        $connection = Database::connect();
+        mysqli_query($connection, $query);
+        return mysqli_insert_id($connection);
     }
 
     /**
