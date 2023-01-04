@@ -165,6 +165,7 @@ a.button {
 .dishes-container-section {
   scroll-margin-block-start: 100px;
   background-color: rgb(255, 255, 240);
+  text-align: center;
 }
 
 .dishes-container-section h3 {
@@ -181,6 +182,7 @@ a.button {
 .dishes-container-li {
   list-style: none;
   display: inline;
+  text-align: left;
 }
 
 .dishes-container-meal {
@@ -200,17 +202,22 @@ a.button {
 .dishes-container-meal p {
   padding: 5px;
   margin-bottom: 15px;
+  height: 40px;
 }
 
 .dishes-container-desc {
-  height: 90px;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dishes-container-meal a {
   position: absolute;
-  left: 25%;
   width: 50%;
-  bottom: 20px;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, 0%);
   padding: 5px;
   text-align: center;
   border-radius: 10px;
@@ -225,4 +232,89 @@ a.button {
 
 .dishes-container-meal:hover {
   box-shadow: 0px 0px 5px gray;
+}
+
+.order-details {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 80%;
+  left: 0;
+}
+
+.order-details span {
+  font-size: 1.4rem;
+  width: 30px;
+  padding: 5px;
+  transition: 0.3s;
+}
+
+.new-order-button {
+  float: right;
+}
+
+.minus-order-button,
+.add-to-order-button {
+  border: transparent;
+  border-radius: 10px;
+  padding: 5px;
+  color: black;
+  background-color: #f44336;
+  width: 50px;
+  height: 45px;
+  font-size: 1.3em;
+  transition: 0.5s;
+}
+
+.add-to-order-button {
+  width: 70px;
+  background-color: #4caf50;
+}
+
+.add-to-order-button:hover {
+  background-color: #369439;
+  box-shadow: 0px, 0px, 15px #4caf50;
+}
+
+.confirm-visible {
+  visibility: visible;
+}
+
+.confirm-hidden {
+  visibility: hidden;
+}
+
+.confirm-message {
+  position: fixed;
+  background: white;
+  border: 1px solid black;
+  top: 50%;
+  left: 50%;
+  transform: translate(-25%, -50%);
+  width: 500px;
+  height: 300px;
+  z-index: 11;
+}
+
+.confirm-message h3,
+.confirm-message input {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 1.5rem;
+}
+.confirm-message input {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.blurred {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 10;
+  background-color: #fff;
+  opacity: 0.8;
 }
