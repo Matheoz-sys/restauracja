@@ -49,6 +49,6 @@ function manageOrder()
     $orderId = insertNewOrder($_GET['id']);
     insertOrderItems($orderId, $data);
 
-    header("Location: ../staff/tables_overview.php");
+    header("Location: /restauracja/Public/management/order_management.php");
 }
 $controller->insertHtmlBeginning();

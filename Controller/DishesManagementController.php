@@ -5,6 +5,7 @@ include_once(__DIR__ . '/../Models/DishModel.php');
 include_once(__DIR__ . '/../Models/DishCategoryModel.php');
 
 $controller = new Controller();
+$controller->setTitle("Dania");
 
 function getCategories()
 {

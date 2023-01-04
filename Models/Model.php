@@ -142,6 +142,12 @@ abstract class Model
 
     public function delete()
     {
+        if (is_null($this->dataArr['id'])) throw new Error(dump($this->dataArr) . "Nie można usunąć nieistniejącego rekordu - id nie moze byc null");
+
+        $id = $this->dataArr['id'];
+        $dbTableName = static::getTableName();
+        $query = "DELETE FROM $dbTableName WHERE `id`=  $id";
+        mysqli_query(Database::connect(), $query);
     }
 
     public function getData(): array

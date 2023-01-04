@@ -2,7 +2,7 @@
     <p class="mainNav__header">Personel</p>
     <ul>
         <li><a href="/restauracja/Public/staff/tables_overview.php">Obsługa sali</a></li>
-        <li><a href="">Pogląd na zamówienia - Funkcja Mc'Donalds</a></li>
+        <li><a href="/restauracja/Public/management/order_management.php">Pogląd na zamówienia - Funkcja Mc'Donalds</a></li>
         <!-- <li><a href=""></a></li>
         <li><a href=""></a></li>
         <li><a href=""></a></li> -->

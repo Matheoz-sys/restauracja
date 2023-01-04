@@ -318,3 +318,109 @@ a.button {
   background-color: #fff;
   opacity: 0.8;
 }
+
+.order-list-conteiner {
+  background: white;
+  /* border: 1px solid black; */
+}
+
+.order-list-conteiner ul {
+  list-style: none;
+}
+
+.order-list-conteiner li {
+  position: relative;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0px 0px 3px gray;
+  margin: 20px 0px;
+  padding: 10px;
+}
+
+.order-list-conteiner li h3 {
+  font-style: italic;
+  padding: 10px;
+  font-size: 1.3rem;
+}
+
+.order-list-conteiner li:hover {
+  box-shadow: 0px 0px 5px gray;
+}
+
+.order-list-table {
+  display: inline-block;
+  max-width: 50%;
+  font-size: 1.4rem;
+  padding: 5px;
+  /*border: 1px solid black;*/
+}
+
+.order-list-table tr {
+  height: 1.5rem;
+}
+
+.order-list-table tr:nth-child(even) {
+  background-color: lightgray;
+}
+
+.order-list-table td {
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+
+.order-status {
+  position: absolute;
+  border-radius: 10px;
+  top: 10%;
+  height: 80%;
+  width: 30%;
+  left: 65%;
+  padding: 5px;
+  box-shadow: 0px 0px 2px gray;
+  text-align: center;
+}
+
+.order-status button,
+.order-status input {
+  position: absolute;
+  padding: 2px;
+  width: 70%;
+  height: 30%;
+  top: 75%;
+  left: 50%;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  transition: 0.3s;
+}
+
+.order-status button:hover,
+.order-status input:hover {
+  cursor: pointer;
+  width: 72%;
+  height: 32%;
+}
+
+.order-status p {
+  padding-top: 5px;
+  font-size: 1.2rem;
+}
+
+.order-ready {
+  background-color: #daf7a6;
+}
+.order-delivered {
+  background-color: rgba(255, 0, 0, 0.3);
+}
+
+.draggable.dragging {
+  opacity: 0.5;
+}
+
+.dragging {
+  opacity: 1;
+  cursor: move;
+}
