@@ -1,0 +1,90 @@
+/* RESET */
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+ }
+
+html{
+   scroll-behavior: smooth;
+}
+
+/* Main Layout */
+
+body {
+  display: flex;
+  max-width: 1000px;
+  margin: auto;
+  border: 1px outset grey;
+  font-family: sans-serif;
+  /* border-right: 1px outset grey; */
+}
+
+aside {
+  flex-basis: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-right: 1px solid grey;
+  text-align: center;
+  max-width: 250px;
+}
+
+main {
+  flex-basis: 70%;
+  flex-grow: 1;
+  padding: 1rem;
+}
+
+/* TEXT FORMATTING  */
+p,h1,h2,h3,h4,h5,h6{
+   line-height: 1.5em;
+}
+
+h1 + p,
+h2 + p,
+h3 + p,
+h4 + p,
+h5 + p,
+h6 + p{
+   margin-top: .4em;
+}
+
+p+p{
+   margin-top: .2em;
+}
+
+/* LINKS */
+a {
+   text-decoration: none;
+}
+
+button,
+a.button {
+   display: inline-block;
+   padding: 0.25rem 0.5rem;
+   background-color: #ddd;
+   color: black;
+   border: 2px outset grey;
+   cursor: pointer;
+   transition: .3s;
+ }
+
+button:hover,
+ a.button:hover{
+  background-color: #ccc;
+ }
+
+ /* TABLES */
+
+table tr td{
+   padding: 2px;
+}
+
+/* FONT AWESOME */
+[class^="fa"]{
+   pointer-events: none;
+}

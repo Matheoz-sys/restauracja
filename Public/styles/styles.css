@@ -1,41 +1,3 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  display: flex;
-  max-width: 1000px;
-  margin: auto;
-  border: 1px outset grey;
-  font-family: sans-serif;
-  /* border-right: 1px outset grey; */
-}
-
-aside {
-  flex-basis: 30%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  border-right: 1px solid grey;
-  text-align: center;
-  max-width: 250px;
-}
-
-main {
-  flex-basis: 70%;
-  flex-grow: 1;
-  padding: 1rem;
-}
-
-a {
-  text-decoration: none;
-}
-
 p.mainNav__header {
   font-weight: 700;
 }
@@ -55,13 +17,6 @@ p.mainNav__header + ul li a {
   justify-content: center;
   padding: 0.15rem 0;
   font-size: 0.9em;
-}
-
-a.button {
-  padding: 0.25rem 0.5rem;
-  background-color: #ddd;
-  color: black;
-  border: 2px outset grey;
 }
 
 .tables {
@@ -165,7 +120,6 @@ a.button {
 .dishes-container-section {
   scroll-margin-block-start: 100px;
   background-color: rgb(255, 255, 240);
-  text-align: center;
 }
 
 .dishes-container-section h3 {
@@ -179,70 +133,39 @@ a.button {
   list-style: none;
 }
 
-.dishes-container-li {
-  list-style: none;
-  display: inline;
-  text-align: left;
+.dishes-container-li{
+   display: flex;
+   position: relative;
+   background-color: #fff;
+   margin: 10px;
+   padding: 10px;
+   box-shadow: 0px 0px 3px gray;
+   transition: 0.3s;
+   font-style: 1.5rem;
 }
-
-.dishes-container-meal {
-  position: relative;
-  display: inline-block;
-  background-color: #fff;
-  margin: 10px;
-  height: 400px;
-  width: 320px;
-  padding: 10px;
-  box-shadow: 0px 0px 3px gray;
-  transition: 0.3s;
-  font-style: 1.5rem;
-}
-
-.dishes-container-meal h4,
-.dishes-container-meal p {
-  padding: 5px;
-  margin-bottom: 15px;
-  height: 40px;
-}
-
-.dishes-container-desc {
-  width: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.dishes-container-meal a {
-  position: absolute;
-  width: 50%;
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  padding: 5px;
-  text-align: center;
-  border-radius: 10px;
-  background-color: lightgrey;
-  color: black;
-  transition: 0.5s;
-}
-
-.dishes-container-meal a:hover {
-  background-color: gray;
-}
-
-.dishes-container-meal:hover {
+.dishes-container-li:hover{
   box-shadow: 0px 0px 5px gray;
 }
 
-.order-details {
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  top: 80%;
-  left: 0;
+.dishes-container-meal {
+   flex-grow: 1;
+   margin-right: 1rem;
 }
 
-.order-details span {
+.order-options {
+   flex-shrink: 0;
+}
+
+.order-options.quantity-buttons{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   gap: .5rem;
+}
+
+.order-options span {
   font-size: 1.4rem;
   width: 30px;
   padding: 5px;
@@ -253,27 +176,34 @@ a.button {
   float: right;
 }
 
-.minus-order-button,
-.add-to-order-button {
-  border: transparent;
-  border-radius: 10px;
-  padding: 5px;
-  color: black;
-  background-color: #f44336;
-  width: 50px;
-  height: 45px;
-  font-size: 1.3em;
-  transition: 0.5s;
+.remove-button,
+.add-button{
+   font-size: 1.2em;
+   width: 35px;
+   height: 35px;
+   border: transparent;
+   border-radius: 50%;
+   padding: 5px;
+   color: white;
+   transition: 0.5s;
+   cursor: pointer;
 }
 
-.add-to-order-button {
-  width: 70px;
-  background-color: #4caf50;
+.add-button{
+   background-color: #4caf50;
 }
 
-.add-to-order-button:hover {
-  background-color: #369439;
-  box-shadow: 0px, 0px, 15px #4caf50;
+.add-button:hover{
+   background-color: #369439;
+   box-shadow: 0px, 0px, 15px #4caf50;
+}
+
+.remove-button{
+   background-color: #f44336;
+}
+
+.remove-button:hover{
+   background-color: #d14a40;
 }
 
 .confirm-visible {

@@ -7,7 +7,7 @@ abstract class Model
     private $dataArr;
     private $changedValues;
     private $availableMagicMethods;
-    
+
     /**
      * Funkcja powinna zwracać nazwę tabeli w bazie danych
      */
