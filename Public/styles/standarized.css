@@ -88,3 +88,10 @@ table tr td{
 [class^="fa"]{
    pointer-events: none;
 }
+
+/* ERRORS LIST */
+.errors_list{
+   font-size: .7em;
+   color: red;
+   padding-left: 1rem;
+}
