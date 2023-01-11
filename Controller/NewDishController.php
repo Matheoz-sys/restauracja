@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+// session_start();
 
 include_once(__DIR__ . '/../Classes/Controller.php');
 include_once(__DIR__ . '/../Models/DishModel.php');
@@ -9,14 +9,14 @@ include_once(__DIR__ . '/../Models/DishCategoryModel.php');
 $controller = new Controller();
 
 function isDishValid()
-{ 
-    // TODO  data validation 
+{
+    // TODO  data validation
     return true;
 }
 
 function insertDishToDatabase($dish)
 {
-   if(isDishValid($dish)){
+    if (isDishValid($dish)) {
         $model = new DishModel();
         $model->setMealName($dish['meal_name']);
         $model->setMealPrice($dish['meal_price']);
@@ -25,13 +25,13 @@ function insertDishToDatabase($dish)
         $model->setCategoryId($dish['meal_category']);
         $model->setIsAvailable($dish['is_available']);
         $model->insert();
-   }
+    }
 }
 
 function getDish()
 {
     $Dish = array(
-        'id' =>NULL,
+        'id' => NULL,
         "meal_name" => $_POST['DishName'],
         "meal_price" => $_POST['DishPrice'],
         "meal_ingredient" => $_POST['DishIngredient'],
@@ -44,16 +44,16 @@ function getDish()
 
 function isDishSet()
 {
-    if(!isset($_POST['DishName'])){ 
+    if (!isset($_POST['DishName'])) {
         return false;
     }
-    if(!isset($_POST['DishPrice'])){
+    if (!isset($_POST['DishPrice'])) {
         return false;
     }
-    if(!isset($_POST['DishIngredient'])){
+    if (!isset($_POST['DishIngredient'])) {
         return false;
     }
-    if(!isset($_POST['Description'])){
+    if (!isset($_POST['Description'])) {
         return false;
     }
     return true;
@@ -61,11 +61,11 @@ function isDishSet()
 
 function process()
 {
-    if(isDishSet()){
+    if (isDishSet()) {
         $dish = getDish();
         insertDishToDatabase($dish);
-        //header("Location: new_dish.php");    
+        //header("Location: new_dish.php");
     }
 }
 
-$controller->insertHtmlBeginning();
+$controller->insertPage();

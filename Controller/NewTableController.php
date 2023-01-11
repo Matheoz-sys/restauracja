@@ -4,59 +4,58 @@ include_once(__DIR__ . '/../Classes/Controller.php');
 include_once(__DIR__ . '/../Models/TableModel.php');
 
 $controller = new Controller();
-$controller->setTitle("Nowy stolik");
+$controller->setSiteTitle("Nowy stolik");
 
 function processPost()
 {
-   // dump($_POST);
-   // dump(dataAvailable() && dataCorrect());
-   if (!empty($_POST) && dataAvailable() && dataCorrect()) {
-      // dump($controller->noErrorsOccured());
-      $table = new TableModel();
-      $table->setTableNumber($_POST['table_number']);
-      $table->setPlacesCount($_POST['places_count']);
-      $table->insert();
-      header("Location: new_table.php");
-   }
+    if (!empty($_POST) && dataAvailable() && dataCorrect()) {
+        $table = new TableModel();
+        $table->setTableNumber($_POST['table_number']);
+        $table->setPlacesCount($_POST['places_count']);
+        $table->insert();
+        header("Location: new_table.php");
+        exit();
+    }
 }
 
 function dataAvailable()
 {
-   global $controller;
+    global $controller;
 
-   if (!isset($_POST['table_number']))
-      $controller->addError("table_number", "Numer stolika nie przesłany w formularzu.");
-   if (!isset($_POST['places_count']))
-      $controller->addError("places_count", "Ilość miejsc nie przesłana w formularzu.");
+    if (!isset($_POST['table_number']))
+        $controller->addError("table_number", "Numer stolika nie przesłany w formularzu.");
 
-   return $controller->noErrorsOccured();
+    if (!isset($_POST['places_count']))
+        $controller->addError("places_count", "Ilość miejsc nie przesłana w formularzu.");
+
+    return $controller->noErrorsOccured();
 }
 
 function dataCorrect()
 {
-   global $controller;
+    global $controller;
 
-   if (tableNumberAlreadyTaken())
-      $controller->addError("table_number", "Istnieje już stolik o takim numerze.");
+    if (!tableNumberValid())
+        $controller->addError("table_number", "Istnieje już stolik o takim numerze.");
 
-   if (!tableHasAtLeastOnePlace())
-      $controller->addError("places_count", "Należy przypisać co najmniej jedno miejsce do stolika.");
+    if (!placesCountValid())
+        $controller->addError("places_count", "Należy przypisać co najmniej jedno miejsce do stolika.");
 
-   return $controller->noErrorsOccured();
+    return $controller->noErrorsOccured();
 }
 
-function tableNumberAlreadyTaken()
+function tableNumberValid()
 {
-   $model = TableModel::findBy("table_number", $_POST['table_number']);
-   return count($model) ? true : false;
+    $model = TableModel::findBy("table_number", $_POST['table_number']);
+    return empty($model);
 }
 
-function tableHasAtLeastOnePlace()
+function placesCountValid()
 {
-   return $_POST['places_count'] > 0 ? true : false;
+    return $_POST['places_count'] > 0;
 }
 
 processPost();
-$controller->insertHtmlBeginning();
+$controller->insertPage();
 
 $errors = $controller->getErrors();

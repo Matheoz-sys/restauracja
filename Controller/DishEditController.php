@@ -11,7 +11,7 @@ $dishData = $dish->getData();
 
 function isSame($oldDish, $newDish)
 {
-    // TODO 
+    // TODO
     return false;
 }
 
@@ -51,7 +51,7 @@ function getDish()
 
 function isDishSet()
 {
-    if(!isset($_POST['DishName'])){ 
+    if(!isset($_POST['DishName'])){
         return false;
     }
     if(!isset($_POST['DishPrice'])){
@@ -82,4 +82,4 @@ function process()
     }
 }
 
-$controller->insertHtmlBeginning();
+$controller->insertPage();

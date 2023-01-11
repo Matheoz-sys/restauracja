@@ -20,11 +20,11 @@ abstract class Model
         $queryResult = mysqli_query(Database::connect(), $query, MYSQLI_USE_RESULT);
         $results = mysqli_fetch_all($queryResult, MYSQLI_ASSOC);
 
-        $this->mapValuesToDataArr($results);
+        $this->mapDBValuesToDataArr($results);
         $this->createSetters();
     }
 
-    private function mapValuesToDataArr($tableDescription): void
+    private function mapDBValuesToDataArr($tableDescription): void
     {
         foreach ($tableDescription as $key => $val) {
             $dbKey = $val['Field'];
@@ -44,17 +44,22 @@ abstract class Model
     public function __call($name, $arguments)
     {
         $this->isCorrectMethod($name);
+        $this->assignNewValue($name, $arguments[0]);
+    }
 
+    private function assignNewValue($name, $value)
+    {
         $dbKey = array_search($name, $this->availableMagicMethods);
-
-        $this->changedValues[$dbKey] = $arguments[0];
-        $this->dataArr[$dbKey] = $arguments[0];
+        if ($this->dataArr[$dbKey] != $value) {
+            $this->changedValues[$dbKey] = $value;
+            $this->dataArr[$dbKey] = $value;
+        }
     }
 
     private function isCorrectMethod($name)
     {
         if ($name == "setId")
-        throw new Error("Nie można edytować ID");
+            throw new Error("Nie można edytować ID");
 
         if (!in_array($name, $this->availableMagicMethods))
             throw new Error(dump($this) . "Brak takiego settera.");
@@ -78,6 +83,18 @@ abstract class Model
         return $results;
     }
 
+    public static function findOneBy($column, $value): self
+    {
+        $dbTableName = static::getTableName();
+        $query = "SELECT * FROM $dbTableName WHERE `$column`=$value LIMIT 1";
+        $queryResult = mysqli_query(Database::connect(), $query);
+        $result = mysqli_fetch_assoc($queryResult);
+
+        $thisObj = new static();
+        $thisObj->dataArr = $result;
+        return $thisObj;
+    }
+
     public static function findById($id): self
     {
         $dbTableName = static::getTableName();
@@ -90,14 +107,14 @@ abstract class Model
         return $thisObj;
     }
 
-    public function update()
+    public function update(): bool
     {
         if (is_null($this->dataArr['id'])) throw new Error(dump($this->dataArr) . "Nie można zaktualizować nieistniejącego rekordu");
 
         $tableName = static::getTableName();
         $query = "UPDATE `$tableName` SET " . self::createUpdateString($this->changedValues) . " WHERE `id` = " . $this->dataArr['id'];
 
-        mysqli_query(Database::connect(), $query);
+        return mysqli_query(Database::connect(), $query);
     }
 
     /**
@@ -153,6 +170,11 @@ abstract class Model
     public function getData(): array
     {
         return $this->dataArr;
+    }
+
+    public function valuesChanged(): bool
+    {
+        return (bool) count($this->changedValues ?? []);
     }
 
 }

@@ -45,10 +45,10 @@ function manageOrder()
 {
     $stringData = $_POST['order-details'];
     $data = json_decode($stringData, true);
-   
+
     $orderId = insertNewOrder($_GET['id']);
     insertOrderItems($orderId, $data);
 
     header("Location: /restauracja/Public/management/order_management.php");
 }
-$controller->insertHtmlBeginning();
+$controller->insertPage();

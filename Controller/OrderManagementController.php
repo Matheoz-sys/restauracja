@@ -7,7 +7,7 @@ include_once(__DIR__ . '/../Models/DishModel.php');
 include_once(__DIR__ . '/../Models/DishCategoryModel.php');
 
 $controller = new Controller();
-$controller->setTitle("Zamówienia");
+$controller->setSiteTitle("Zamówienia");
 $orders = OrderModel::findAll();
 
 if(isset($_POST['delete-order'])){
@@ -49,4 +49,4 @@ function deleteOrder($id)
     $model->delete();
 }
 
-$controller->insertHtmlBeginning();
+$controller->insertPage();

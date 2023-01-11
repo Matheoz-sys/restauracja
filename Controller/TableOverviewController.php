@@ -8,7 +8,7 @@ $controller = new Controller();
 $table = TableModel::findById($_GET['id'])->getData();
 
 $idStolika = $table['id'];
-$controller->setTitle("Stolik #$idStolika");
+$controller->setSiteTitle("Stolik #$idStolika");
 
 
-$controller->insertHtmlBeginning();
+$controller->insertPage();

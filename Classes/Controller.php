@@ -1,82 +1,61 @@
 <?php
 
 include_once __DIR__ . "/../config.php";
+include_once __DIR__ . '/../Classes/Session.php';
+include_once __DIR__ . '/../Classes/Messager.php';
 include_once __DIR__ . "/../Functions/StringUtils.php";
 
 class Controller
 {
-   private array $template = [];
-   private array $errors = [];
-   private array $massErrors = [];
+    private array $template = [];
+    private array $errors = [];
 
-   public function setTitle(string $title)
-   {
-      $this->template['title'] = $title . " - " . SITE_NAME;
-   }
-
-   public function setBodyClass(string $bodyClass)
-   {
-      $this->template['bodyClass '] = $bodyClass;
-   }
-
-   public function addMassError($error)
-   {
-      $this->massErrors[] = $error;
-   }
-
-   public function addError($name, $error)
-   {
-      $this->errors[$name][] = $error;
-   }
-
-   public function getErrors()
-   {
-      return $this->errors ?? [];
-   }
-
-   public function getMassErrors()
-   {
-      return $this->massErrors ?? [];
-   }
-
-   //Bądź validationPassed
-   public function noErrorsOccured()
-   {
-      return empty($this->errors) && empty($this->massErrors);
-   }
-
-   public function insertHtmlBeginning()
-   {
-      $this->insertDocumentBeginning();
-      $this->insertBodyBeginning();
-      $this->insertNav();
-   }
-
-    private function insertDocumentBeginning()
-   {
-      extract($this->template);
-      include_once __DIR__ . "/../Templates/head.php";
+    public function setSiteTitle(string $title)
+    {
+        $this->template['siteTitle'] = $title . " - " . SITE_NAME;
     }
 
-    private function insertBodyBeginning()
-   {
-      extract($this->template);
-      include_once __DIR__ . "/../Templates/startOfBody.php";
+    public function setPageTitle(string $title)
+    {
+        $this->template['pageTitle'] = $title;
     }
 
-    private function insertNav()
-   {
-      extract($this->template);
-      include_once __DIR__ . "/../Templates/mainNav.php";
+    public function setBodyClass(string $bodyClass)
+    {
+        $this->template['bodyClass'] = $bodyClass;
+    }
+
+    public function addError($name, $error)
+    {
+        $this->errors[$name][] = $error;
+    }
+
+    public function getErrors(): array
+    {
+        return $this->errors ?? [];
+    }
+
+    public function noErrorsOccured()
+    {
+        return empty($this->errors);
+    }
+
+    public function insertPage()
+    {
+        extract($this->template);
+        include_once __DIR__ . "/../Templates/head.php";
+        include_once __DIR__ . "/../Templates/startOfBody.php";
+        include_once __DIR__ . "/../Templates/mainNav.php";
+        include_once __DIR__ . "/../Templates/pageHeader.php";
     }
 
     public static function insertHtmlEnd()
     {
-      self::insertScripts();
+        self::insertScripts();
     }
 
     private static function insertScripts()
     {
-      include_once __DIR__ . "/../Templates/scripts.php";
+        include_once __DIR__ . "/../Templates/scripts.php";
     }
 }

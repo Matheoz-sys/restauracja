@@ -3,4 +3,5 @@
 include_once(__DIR__ . '/../Classes/Controller.php');
 
 $controller = new Controller();
-$controller->insertHtmlBeginning();
+$controller->setPageTitle("Witamy - " . SITE_NAME);
+$controller->insertPage();
