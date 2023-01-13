@@ -31,11 +31,6 @@ class Controller
         Messager::addError($error);
     }
 
-    public function getErrors(): array
-    {
-        return $this->errors ?? [];
-    }
-
     public function noErrorsOccured()
     {
         return empty($this->errors);
