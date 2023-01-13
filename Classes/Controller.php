@@ -27,7 +27,8 @@ class Controller
 
     public function addError($name, $error)
     {
-        $this->errors[$name][] = $error;
+        $this->errors[] = "$name";
+        Messager::addError($error);
     }
 
     public function getErrors(): array
