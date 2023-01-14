@@ -10,12 +10,16 @@ include_once __DIR__ . "/Functions/StringUtils.php";
 
 $request = $_SERVER['REQUEST_URI'];
 
+
 $uri = cutOutUriOnly($request);
+$uri = str_replace("/restauracja", "", $uri);
 
 switch ($uri) {
 
     case '':
+    case 'index.php':
     case '/':
+    case '/index.php':
         require_once __DIR__ . '/Controller/IndexController.php';
         $controller = new IndexController("index.php");
         $controller->execute();

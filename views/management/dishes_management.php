@@ -29,7 +29,7 @@
                                 <p>Kategoria: <?= $category['category_name'] ?> </p>
                             </div>
                             <div class="order-options">
-                                <a class="button dish-edit-button" href='/management/dish_edit?id=<?= $meal['id'] ?>' id='<?= $meal['id'] ?>'><i class="fa-sharp fa-solid fa-pen-to-square"></i> Edytuj</a>
+                                <a class="button dish-edit-button" href='/restauracja/management/dish_edit?id=<?= $meal['id'] ?>' id='<?= $meal['id'] ?>'><i class="fa-sharp fa-solid fa-pen-to-square"></i> Edytuj</a>
                             </div>
                         </li>
                 <?php   }

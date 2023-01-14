@@ -56,4 +56,4 @@
     </div>
 </div>
 
-<script src="/dev/js/new_order.js"></script>
+<script src="/restauracja/dev/js/new_order.js"></script>

@@ -1,9 +1,10 @@
-
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
 # To Index
+
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^.*$ /index.php [L,QSA]
+    RewriteRule ^.*$ /restauracja/index.php [L,QSA]
+
 </IfModule>
