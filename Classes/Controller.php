@@ -1,22 +1,36 @@
 <?php
-class Controller
+abstract class Controller
 {
-    private array $template = [];
+
+    private string $view;
+    private array $scripts;
+    private array $templateVariables = [];
     private array $errors = [];
+
+    public function __construct($view)
+    {
+        $this->view = $view;
+        $this->scripts[] = "globalScripts";
+    }
+
+    protected function setTemplateData($data, $name)
+    {
+        $this->templateVariables[$name] = $data;
+    }
 
     public function setSiteTitle(string $title)
     {
-        $this->template['siteTitle'] = $title . " - " . SITE_NAME;
+        $this->templateVariables['siteTitle'] = $title . " - " . SITE_NAME;
     }
 
     public function setPageTitle(string $title)
     {
-        $this->template['pageTitle'] = $title;
+        $this->templateVariables['pageTitle'] = $title;
     }
 
     public function setBodyClass(string $bodyClass)
     {
-        $this->template['bodyClass'] = $bodyClass;
+        $this->templateVariables['bodyClass'] = $bodyClass;
     }
 
     public function addError($name, $error)
@@ -30,22 +44,34 @@ class Controller
         return empty($this->errors);
     }
 
-    public function insertPage()
+    public function execute()
     {
-        extract($this->template);
+        $this->process();
+        $this->insertPage();
+    }
+
+    private function insertPage()
+    {
+        extract($this->templateVariables);
         include_once __DIR__ . "/../templates/head.php";
         include_once __DIR__ . "/../templates/startOfBody.php";
         include_once __DIR__ . "/../templates/mainNav.php";
         include_once __DIR__ . "/../templates/pageHeader.php";
+        include_once __DIR__ . "/../views/" . $this->view;
+        $this->insertScripts();
     }
 
-    public static function insertHtmlEnd()
+    public function addScript($scriptName)
     {
-        self::insertScripts();
+        $this->scripts[] = $scriptName;
     }
 
-    private static function insertScripts()
+    private function insertScripts()
     {
-        include_once __DIR__ . "/../templates/scripts.php";
+        foreach ($this->scripts as $fileName) {
+            include_once __DIR__ . "/../templates/$fileName.php";
+        }
     }
+
+    abstract protected function process();
 }

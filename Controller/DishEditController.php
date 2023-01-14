@@ -3,10 +3,16 @@
 include_once(__DIR__ . '/../Models/DishModel.php');
 include_once(__DIR__ . '/../Models/DishCategoryModel.php');
 
-$controller = new Controller();
+class DishEditController extends Controller
+{
+    protected function process()
+    {
+        $dish = DishModel::findById($_GET['id']);
+        $dishData = $dish->getData();
 
-$dish = DishModel::findById($_GET['id']);
-$dishData = $dish->getData();
+        $this->setTemplateData($dishData, 'dishData');
+    }
+}
 
 function isSame($oldDish, $newDish)
 {
@@ -76,6 +82,3 @@ function process()
         deleteDish();
     }
 }
-
-process();
-$controller->insertPage();

@@ -4,11 +4,20 @@ include_once(__DIR__ . '/../Models/OrderModel.php');
 include_once(__DIR__ . '/../Models/OrderItemModel.php');
 include_once(__DIR__ . '/../Controller/DishesManagementController.php');
 
-$controller = new Controller();
+class NewOrderController extends Controller
+{
+    protected function process()
+    {
 
-$categories = getCategories();
-$meals = getMeals();
-$tableId = $_GET['id'];
+        $categories = DishCategoryModel::findAll();
+        $meals = DishModel::findAll();
+        $tableId = $_GET['id'];
+
+        $this->setTemplateData($categories, 'categories');
+        $this->setTemplateData($meals, 'meals');
+        $this->setTemplateData($tableId, 'tableId');
+    }
+}
 
 if (isset($_POST['order-details'])) {
     manageOrder();
@@ -50,5 +59,3 @@ function manageOrder()
 
     header("Location: /management/order_management");
 }
-
-$controller->insertPage();

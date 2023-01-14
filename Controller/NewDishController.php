@@ -1,9 +1,14 @@
 <?php
-
 include_once(__DIR__ . '/../Models/DishModel.php');
 include_once(__DIR__ . '/../Models/DishCategoryModel.php');
 
-$controller = new Controller();
+class NewDishController extends Controller
+{
+    protected function process()
+    {
+    }
+}
+
 
 function isDishValid()
 {
@@ -64,6 +69,3 @@ function process()
         header("Location: new_dish.php");
     }
 }
-
-process();
-$controller->insertPage();

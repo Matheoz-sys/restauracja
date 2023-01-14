@@ -1,13 +1,14 @@
 <?php
-
 include_once(__DIR__ . '/../Models/TableModel.php');
 
-$controller = new Controller();
+class TableOverviewController extends Controller
+{
+    protected function process()
+    {
+        $table = TableModel::findById($_GET['id'])->getData();
+        $idStolika = $table['id'];
 
-$table = TableModel::findById($_GET['id'])->getData();
-
-$idStolika = $table['id'];
-$controller->setSiteTitle("Stolik #$idStolika");
-
-
-$controller->insertPage();
+        $this->setSiteTitle("Stolik #$idStolika");
+        $this->setTemplateData($table, 'table');
+    }
+}

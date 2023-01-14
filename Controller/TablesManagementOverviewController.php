@@ -1,10 +1,14 @@
 <?php
-
 include_once(__DIR__ . '/../Models/TableModel.php');
+class TablesManagementOverviewController extends Controller
+{
+    protected function process()
+    {
+        $this->setPageTitle("Wybierz obsługiwany stolik");
+        $this->setSiteTitle("Wybór stolików");
 
-$controller = new Controller();
-$controller->setSiteTitle("Wybór stolików");
+        $tables = TableModel::findAll();
 
-$tables = TableModel::findAll();
-
-$controller->insertPage();
+        $this->setTemplateData($tables, 'tables');
+    }
+}

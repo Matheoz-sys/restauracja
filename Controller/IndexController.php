@@ -1,5 +1,9 @@
 <?php
 
-$controller = new Controller();
-$controller->setPageTitle("Witamy - " . SITE_NAME);
-$controller->insertPage();
+class IndexController extends Controller
+{
+    protected function process()
+    {
+        $this->setPageTitle("Witamy - " . SITE_NAME);
+    }
+}

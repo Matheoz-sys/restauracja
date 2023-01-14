@@ -10,64 +10,75 @@ include_once __DIR__ . "/Functions/StringUtils.php";
 
 $request = $_SERVER['REQUEST_URI'];
 
-$uriAndParams = splitUriAndParams($request);
+$uri = cutOutUriOnly($request);
 
-switch ($uriAndParams[0]) {
+switch ($uri) {
 
     case '':
     case '/':
         require_once __DIR__ . '/Controller/IndexController.php';
-        require_once __DIR__ . '/views/index.php';
+        $controller = new IndexController("index.php");
+        $controller->execute();
         break;
 
     case '/management/dish_edit':
         require_once __DIR__ . '/Controller/DishEditController.php';
-        require_once __DIR__ . '/views/management/dish_edit.php';
+        $controller = new DishEditController('management/dish_edit.php');
+        $controller->execute();
         break;
 
     case '/management/dishes_management':
         require_once __DIR__ . '/Controller/DishesManagementController.php';
-        require_once __DIR__ . '/views/management/dishes_management.php';
+        $controller = new DishesManagementController("management/dishes_management.php");
+        $controller->execute();
         break;
 
     case '/management/new_dish':
         require_once __DIR__ . '/Controller/NewDishController.php';
-        require_once __DIR__ . '/views/management/new_dish.php';
+        $controller = new NewDishController("management/new_dish.php");
+        $controller->execute();
         break;
 
     case '/management/new_order':
         require_once __DIR__ . '/Controller/NewOrderController.php';
-        require_once __DIR__ . '/views/management/new_order.php';
+        $controller = new NewOrderController("management/new_order.php");
+        $controller->execute();
         break;
 
     case '/management/new_table':
         require_once __DIR__ . '/Controller/NewTableController.php';
-        require_once __DIR__ . '/views/management/new_table.php';
-        break;
-
-    case '/management/tables_management_overview':
-        require_once __DIR__ . '/Controller/TablesManagementOverviewController.php';
-        require_once __DIR__ . '/views/management/tables_management_overview.php';
+        $controller = new NewTableController("management/new_table.php");
+        $controller->execute();
         break;
 
     case '/management/table_edit':
         require_once __DIR__ . '/Controller/TableEditController.php';
-        require_once __DIR__ . '/views/management/table_edit.php';
+        $controller = new TableEditController("management/table_edit.php");
+        $controller->execute();
         break;
 
     case '/management/order_management':
         require_once __DIR__ . '/Controller/OrderManagementController.php';
-        require_once __DIR__ . '/views/management/order_management.php';
+        $controller = new OrderManagementController("management/order_management.php");
+        $controller->execute();
+        break;
+
+    case '/management/tables_management_overview':
+        require_once __DIR__ . '/Controller/TablesManagementOverviewController.php';
+        $controller = new TablesManagementOverviewController("management/tables_management_overview.php");
+        $controller->execute();
         break;
 
     case '/staff/table_overview':
         require_once __DIR__ . '/Controller/TableOverviewController.php';
-        require_once __DIR__ . '/views/staff/table_overview.php';
+        $controller = new TableOverviewController("staff/table_overview.php");
+        $controller->execute();
         break;
 
     case '/staff/tables_overview':
         require_once __DIR__ . '/Controller/TablesOverviewController.php';
-        require_once __DIR__ . '/views/staff/tables_overview.php';
+        $controller = new TablesOverviewController("staff/tables_overview.php");
+        $controller->execute();
         break;
 
     default:
@@ -76,36 +87,9 @@ switch ($uriAndParams[0]) {
         break;
 }
 
-
-Controller::insertHtmlEnd();
-
-function cutOutUriOnly($request): array
+function cutOutUriOnly($request): string
 {
-    if (!str_contains($request, "?")) return [$request];
+    if (!str_contains($request, "?")) return $request;
     $uriAndParams = explode("?", $request);
     return $uriAndParams[0];
-}
-
-function splitUriAndParams($request): array
-{
-    if (!str_contains($request, "?")) return [$request];
-    //staff/table_overview?id=6&ef=7
-
-    $uriAndParams = explode("?", $request);
-
-    $uri = $uriAndParams[0];                    //staff/table_overview
-    $params = explode("&", $uriAndParams[1]);   //id=6&ef=7
-
-    $paramsCollection = [];
-
-    foreach ($params as $param) {
-        $item = explode("=", $param);
-        $paramsCollection[$item[0]] = $item[1]; // array[id = 6, ef = 7]
-    };
-
-    $uriAndParams = [$uri, $paramsCollection];
-    // $uri                = array[0] = "staff/table_overview"
-    // $paramsCollection   = array[1] = [id = 6, ef = 7]
-
-    return $uriAndParams;
 }

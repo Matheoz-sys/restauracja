@@ -5,9 +5,15 @@ include_once(__DIR__ . '/../Models/OrderItemModel.php');
 include_once(__DIR__ . '/../Models/DishModel.php');
 include_once(__DIR__ . '/../Models/DishCategoryModel.php');
 
-$controller = new Controller();
-$controller->setSiteTitle("Zamówienia");
-$orders = OrderModel::findAll();
+class OrderManagementController extends Controller
+{
+    protected function process()
+    {
+        $orders = OrderModel::findAll();
+        $this->setSiteTitle("Zamówienia");
+        $this->setTemplateData($orders, 'orders');
+    }
+}
 
 if (isset($_POST['delete-order'])) {
     $id = $_POST['delete-order'];
@@ -46,5 +52,3 @@ function deleteOrder($id)
     $model = OrderModel::findById($id);
     $model->delete();
 }
-
-$controller->insertPage();

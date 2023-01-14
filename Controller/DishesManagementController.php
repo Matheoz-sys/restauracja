@@ -2,21 +2,16 @@
 
 include_once(__DIR__ . '/../Models/DishModel.php');
 include_once(__DIR__ . '/../Models/DishCategoryModel.php');
-
-$controller = new Controller();
-$controller->setSiteTitle("Dania");
-
-function getCategories()
+class DishesManagementController extends Controller
 {
-    return DishCategoryModel::findAll();
+    protected function process()
+    {
+        $this->setSiteTitle("Dania");
+
+        $categories = DishCategoryModel::findAll();
+        $meals = DishModel::findAll();
+
+        $this->setTemplateData($categories, 'categories');
+        $this->setTemplateData($meals, 'meals');
+    }
 }
-
-function getMeals()
-{
-    return DishModel::findAll();
-}
-
-$controller->insertPage();
-
-$categories = getCategories();
-$meals = getMeals();

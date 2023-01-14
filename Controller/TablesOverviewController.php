@@ -1,9 +1,13 @@
 <?php
+
 include_once(__DIR__ . '/../Models/TableModel.php');
-
-$controller = new Controller();
-$controller->setSiteTitle("Wybór stolików");
-
-$tables = TableModel::findAll();
-
-$controller->insertPage();
+class TablesOverviewController extends Controller
+{
+    protected function process()
+    {
+        $this->setBodyClass("body");
+        $tables = TableModel::findAll();
+        $this->setTemplateData($tables, 'tables');
+        $this->setSiteTitle("Wybór stolików");
+    }
+}
