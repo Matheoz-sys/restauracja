@@ -1,6 +1,5 @@
 <?php
 
-include_once(__DIR__ . '/../Classes/Controller.php');
 include_once(__DIR__ . '/../Models/TableModel.php');
 
 $controller = new Controller();
@@ -32,7 +31,7 @@ function processPost()
         $dataUpdateStatus = $table->update();
         generateUpdateStatus($table, $dataUpdateStatus);
 
-        header("Location: table_edit.php?id=" . $_GET['id']);
+        header("Location: table_edit?id=" . $_GET['id']);
         exit();
     } else {
         Messager::addNotice("Brak danych do zaktualizowania");

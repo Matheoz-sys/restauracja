@@ -1,7 +1,4 @@
 <?php
-
-include_once __DIR__ . '/../config.php';
-
 class Messager
 {
     private static $messages = [];
@@ -85,7 +82,6 @@ class Messager
 
     private static function loadSessionMessages()
     {
-        // session_start();
         if (empty(self::$messages)) self::$messages = Session::getInstance()->loadData(self::class) ?? [];
     }
 }

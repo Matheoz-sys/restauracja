@@ -1,6 +1,5 @@
 <?php
 
-include_once(__DIR__ . '/../Classes/Controller.php');
 include_once(__DIR__ . '/../Models/DishModel.php');
 include_once(__DIR__ . '/../Models/DishCategoryModel.php');
 
@@ -17,8 +16,7 @@ function isSame($oldDish, $newDish)
 
 function updateDish($oldDish, $newDish)
 {
-    if(!isSame($oldDish, $newDish))
-    {
+    if (!isSame($oldDish, $newDish)) {
         $oldDish->setMealName($newDish['meal_name']);
         $oldDish->setMealPrice($newDish['meal_price']);
         $oldDish->setMealIngredient($newDish['meal_ingredient']);
@@ -38,7 +36,7 @@ function deleteDish()
 function getDish()
 {
     $Dish = array(
-        'id' =>NULL,
+        'id' => NULL,
         "meal_name" => $_POST['DishName'],
         "meal_price" => $_POST['DishPrice'],
         "meal_ingredient" => $_POST['DishIngredient'],
@@ -51,16 +49,16 @@ function getDish()
 
 function isDishSet()
 {
-    if(!isset($_POST['DishName'])){
+    if (!isset($_POST['DishName'])) {
         return false;
     }
-    if(!isset($_POST['DishPrice'])){
+    if (!isset($_POST['DishPrice'])) {
         return false;
     }
-    if(!isset($_POST['DishIngredient'])){
+    if (!isset($_POST['DishIngredient'])) {
         return false;
     }
-    if(!isset($_POST['Description'])){
+    if (!isset($_POST['Description'])) {
         return false;
     }
     return true;
@@ -68,18 +66,16 @@ function isDishSet()
 
 function process()
 {
-    if(isDishSet())
-    {
+    if (isDishSet()) {
         $newDish = getDish();
         $oldDish = $GLOBALS['dish'];
         updateDish($oldDish, $newDish);
-
     }
 
-    if(isset($_POST['delete']))
-    {
+    if (isset($_POST['delete'])) {
         deleteDish();
     }
 }
 
+process();
 $controller->insertPage();

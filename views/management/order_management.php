@@ -1,8 +1,3 @@
-<?php
-require_once __DIR__ . '/../../Controller/OrderManagementController.php';
-?>
-
-
 <div class="order-list-conteiner">
     <ul class="order-list-ul">
         <?php foreach ($orders as $item) : ?>
@@ -42,5 +37,3 @@ require_once __DIR__ . '/../../Controller/OrderManagementController.php';
 </div>
 
 <script src="../../dev/js/order_list.js"></script>
-<?php
-Controller::insertHtmlEnd();

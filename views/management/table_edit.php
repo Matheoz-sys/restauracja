@@ -1,8 +1,3 @@
-<?php
-require_once __DIR__ . '/../../Controller/TableEditController.php';
-?>
-
-
 <div class="new-table">
     <table>
         <form method="POST">
@@ -20,7 +15,3 @@ require_once __DIR__ . '/../../Controller/TableEditController.php';
         </form>
     </table>
 </div>
-
-
-<?php
-Controller::insertHtmlEnd();

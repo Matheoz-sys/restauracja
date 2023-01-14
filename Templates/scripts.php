@@ -1,1 +1,1 @@
-<script src="/restauracja/dev/js/dumper.js"></script>
+<script src="/dev/js/dumper.js"></script>

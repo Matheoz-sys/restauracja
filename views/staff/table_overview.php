@@ -1,8 +1,3 @@
-<?php
-require_once __DIR__ . '/../../Controller/TableOverviewController.php';
-?>
-
-
 <div class="table-status">
     <h2>Stolik nr: <?= $table['table_number'] ?></h2>
     <table>
@@ -20,8 +15,5 @@ require_once __DIR__ . '/../../Controller/TableOverviewController.php';
         </tr>
     </table>
 </div>
-<a href='/restauracja/Public/management/new_order.php?id=<?= $table['table_number'] ?>' id='<?= $table['table_number'] ?>'>Zamów</a>
+<a href='/management/new_order?id=<?= $table['table_number'] ?>' id='<?= $table['table_number'] ?>'>Zamów</a>
 </div>
-
-<?php
-Controller::insertHtmlEnd();

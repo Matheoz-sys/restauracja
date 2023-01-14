@@ -1,8 +1,5 @@
 <?php
 
-// session_start();
-
-include_once(__DIR__ . '/../Classes/Controller.php');
 include_once(__DIR__ . '/../Models/DishModel.php');
 include_once(__DIR__ . '/../Models/DishCategoryModel.php');
 
@@ -64,8 +61,9 @@ function process()
     if (isDishSet()) {
         $dish = getDish();
         insertDishToDatabase($dish);
-        //header("Location: new_dish.php");
+        header("Location: new_dish.php");
     }
 }
 
+process();
 $controller->insertPage();

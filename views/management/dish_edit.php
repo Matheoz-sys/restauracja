@@ -1,8 +1,3 @@
-<?php
-require_once __DIR__ . '/../../Controller/DishEditController.php';
-?>
-
-
 <div class="new-dish">
     <h2>Edytowane danie: <?= $dishData['meal_name'] ?></h2>
     <table class="new-dish-table">
@@ -50,8 +45,3 @@ require_once __DIR__ . '/../../Controller/DishEditController.php';
         </form>
     </table>
 </div>
-<?= process(); ?>
-
-
-<?php
-Controller::insertHtmlEnd();

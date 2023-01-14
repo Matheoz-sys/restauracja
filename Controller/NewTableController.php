@@ -1,6 +1,5 @@
 <?php
 
-include_once(__DIR__ . '/../Classes/Controller.php');
 include_once(__DIR__ . '/../Models/TableModel.php');
 
 $controller = new Controller();
@@ -13,7 +12,7 @@ function processPost()
         $table->setTableNumber($_POST['table_number']);
         $table->setPlacesCount($_POST['places_count']);
         $table->insert();
-        header("Location: new_table.php");
+        header("Location: new_table");
         exit();
     }
 }
@@ -57,5 +56,3 @@ function placesCountValid()
 
 processPost();
 $controller->insertPage();
-
-$errors = $controller->getErrors();

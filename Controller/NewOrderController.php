@@ -1,6 +1,5 @@
 <?php
 
-include_once(__DIR__ . '/../Classes/Controller.php');
 include_once(__DIR__ . '/../Models/OrderModel.php');
 include_once(__DIR__ . '/../Models/OrderItemModel.php');
 include_once(__DIR__ . '/../Controller/DishesManagementController.php');
@@ -11,7 +10,7 @@ $categories = getCategories();
 $meals = getMeals();
 $tableId = $_GET['id'];
 
-if(isset($_POST['order-details'])){
+if (isset($_POST['order-details'])) {
     manageOrder();
 }
 
@@ -26,8 +25,8 @@ function insertOneOrderItem($orderId, $mealId, $meal_amount)
 
 function insertOrderItems($orderId, $data)
 {
-    foreach($data as $key){
-        foreach($key as $value){
+    foreach ($data as $key) {
+        foreach ($key as $value) {
             insertOneOrderItem($orderId, $value['mealId'], $value['amount']);
         }
     }
@@ -49,6 +48,7 @@ function manageOrder()
     $orderId = insertNewOrder($_GET['id']);
     insertOrderItems($orderId, $data);
 
-    header("Location: /restauracja/Public/management/order_management.php");
+    header("Location: /management/order_management");
 }
+
 $controller->insertPage();

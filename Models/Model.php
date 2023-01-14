@@ -1,7 +1,4 @@
 <?php
-
-include_once(__DIR__ . '/../Classes/Database.php');
-
 abstract class Model
 {
     private $dataArr;
@@ -176,5 +173,4 @@ abstract class Model
     {
         return (bool) count($this->changedValues ?? []);
     }
-
 }
