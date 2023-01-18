@@ -36,4 +36,4 @@
     </ul>
 </div>
 
-<script src="../../dev/js/order_list.js"></script>
+<script src="../dev/js/order_list.js"></script>

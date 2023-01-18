@@ -10,75 +10,63 @@ class DishEditController extends Controller
         $dish = DishModel::findById($_GET['id']);
         $dishData = $dish->getData();
 
+        $this->processPOST($dish);
+
         $this->setTemplateData($dishData, 'dishData');
     }
-}
 
-function isSame($oldDish, $newDish)
-{
-    // TODO
-    return false;
-}
+    private function processPOST($dish)
+    {
+        if (empty($_POST)) return;
 
-function updateDish($oldDish, $newDish)
-{
-    if (!isSame($oldDish, $newDish)) {
-        $oldDish->setMealName($newDish['meal_name']);
-        $oldDish->setMealPrice($newDish['meal_price']);
-        $oldDish->setMealIngredient($newDish['meal_ingredient']);
-        $oldDish->setMealDescription($newDish['meal_description']);
-        $oldDish->setCategoryId($newDish['meal_category']);
-        $oldDish->setIsAvailable($newDish['is_available']);
-        $oldDish->update();
-    }
-}
+        if($_POST['delete']){
+            $dish->delete();
+            header("Location: dishes_management");
+            exit();
+        }
 
-function deleteDish()
-{
-    // TODO
-    dump($_POST['delete']);
-}
+        if ($this->isDishSet())
+        {
+            $this->setDish($dish);
+        }
 
-function getDish()
-{
-    $Dish = array(
-        'id' => NULL,
-        "meal_name" => $_POST['DishName'],
-        "meal_price" => $_POST['DishPrice'],
-        "meal_ingredient" => $_POST['DishIngredient'],
-        "meal_description" => $_POST['Description'],
-        "meal_category" => $_POST['DishCategory'],
-        "is_available" => '1',
-    );
-    return $Dish;
-}
+        if($dish->valuesChanged()){
+            $dish->update();
+            Messager::addConfirmation("Danie zaktualizowane");
 
-function isDishSet()
-{
-    if (!isset($_POST['DishName'])) {
-        return false;
-    }
-    if (!isset($_POST['DishPrice'])) {
-        return false;
-    }
-    if (!isset($_POST['DishIngredient'])) {
-        return false;
-    }
-    if (!isset($_POST['Description'])) {
-        return false;
-    }
-    return true;
-}
-
-function process()
-{
-    if (isDishSet()) {
-        $newDish = getDish();
-        $oldDish = $GLOBALS['dish'];
-        updateDish($oldDish, $newDish);
+            header("Location: dish_edit?id=" . $_GET['id']);
+            exit();
+        }
+        else{
+            Messager::addNotice("Brak danych do zaktualizowania");
+            return false;
+        }
     }
 
-    if (isset($_POST['delete'])) {
-        deleteDish();
+    private function setDish(&$dish)
+    {
+        $dish->setMealName($_POST['DishName']);
+        $dish->setMealPrice($_POST['DishPrice']);
+        $dish->setMealIngredient($_POST['DishIngredient']);
+        $dish->setMealDescription($_POST['Description']);
+        $dish->setCategoryId($_POST['DishCategory']);
+        $dish->setIsAvailable('1');
+    }
+
+    private function isDishSet()
+    {
+        if (!isset($_POST['DishName'])) {
+            $this->addError("table_number", "Nazwa dania nie przesłany w formularzu.");
+        }
+        if (!isset($_POST['DishPrice'])) {
+            $this->addError("dish_price", "Cena nie przesłany w formularzu.");
+        }
+        if (!isset($_POST['DishIngredient'])) {
+            $this->addError("dish_ingredient", "Składniki nie przesłany w formularzu.");
+        }
+        if (!isset($_POST['Description'])) {
+            $this->addError("dish_description", "Opis stolika nie przesłany w formularzu.");
+        }
+        return $this->noErrorsOccured();
     }
 }
