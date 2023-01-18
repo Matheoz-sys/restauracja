@@ -7,14 +7,14 @@
                     <table class="order-list-table">
                         <tr>
                             <td>Dla stolika nr: </td>
-                            <td><?= $item['tables_id'] ?></td>
+                            <td><?= OrderManagementController::getTableNr($item['tables_id']) ?></td>
                         </tr>
                         <tr>
                             <td colspan="2">Details:</td>
                         </tr>
-                        <?php foreach (getOrderItems($item['id']) as $i) : ?>
+                        <?php foreach (OrderManagementController::getOrderItems($item['id']) as $i) : ?>
                             <tr>
-                                <td><?= getMealName($i['meal_id']) ?></td>
+                                <td><?= OrderManagementController::getMealName($i['meal_id']) ?></td>
                                 <td><?= $i['meal_amount'] ?></td>
                             </tr>
                         <?php endforeach ?>

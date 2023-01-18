@@ -9,7 +9,7 @@
     <div class="blurred"></div>
 </div>
 <div>
-    <h2>Stolik nr:<?= $tableId ?> </h2>
+    <h2>Stolik nr:<?= $tableNr ?> </h2>
 </div>
 <div>
     <h2>Dodaj zamówienie</h2>
@@ -56,4 +56,4 @@
     </div>
 </div>
 
-<script src="/restauracja/dev/js/new_order.js"></script>
+<script src="/restauracja/views/js/new_order.js"></script>

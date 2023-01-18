@@ -15,5 +15,5 @@
         </tr>
     </table>
 </div>
-<a href='/restauracja/management/new_order?id=<?= $table['table_number'] ?>' id='<?= $table['table_number'] ?>'>Zamów</a>
+<a href='/restauracja/management/new_order?id=<?= $table['id'] ?>&nr=<?= $table['table_number']?>' id='<?= $table['id'] ?>'>Zamów</a>
 </div>

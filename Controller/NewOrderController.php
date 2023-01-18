@@ -8,54 +8,61 @@ class NewOrderController extends Controller
 {
     protected function process()
     {
-
         $categories = DishCategoryModel::findAll();
         $meals = DishModel::findAll();
         $tableId = $_GET['id'];
+        $tableNr = $_GET['nr'];
+
+        $this->processPOST();
 
         $this->setTemplateData($categories, 'categories');
         $this->setTemplateData($meals, 'meals');
         $this->setTemplateData($tableId, 'tableId');
+        $this->setTemplateData($tableNr, 'tableNr');
+        $this->setPageTitle("Nowe zamówienie");
     }
-}
 
-if (isset($_POST['order-details'])) {
-    manageOrder();
-}
-
-function insertOneOrderItem($orderId, $mealId, $meal_amount)
-{
-    $orderItem = new OrderItemModel();
-    $orderItem->setOrderId($orderId);
-    $orderItem->setMealId($mealId);
-    $orderItem->setMealAmount($meal_amount);
-    $orderItem->insert();
-}
-
-function insertOrderItems($orderId, $data)
-{
-    foreach ($data as $key) {
-        foreach ($key as $value) {
-            insertOneOrderItem($orderId, $value['mealId'], $value['amount']);
+    private function processPOST()
+    {
+        if (isset($_POST['order-details'])) {
+            $this->manageOrder();
         }
     }
-}
 
-function insertNewOrder($tableId)
-{
-    $order = new OrderModel();
-    $order->setTablesId($tableId);
-    $order->setOrderStatus("w realizacji");
-    return $order->insert();
-}
+    private function manageOrder()
+    {
+        $stringData = $_POST['order-details'];
+        $data = json_decode($stringData, true);
 
-function manageOrder()
-{
-    $stringData = $_POST['order-details'];
-    $data = json_decode($stringData, true);
+        $orderId = $this->insertNewOrder($_GET['id']);
+        $this->insertOrderItems($orderId, $data);
 
-    $orderId = insertNewOrder($_GET['id']);
-    insertOrderItems($orderId, $data);
+        header("Location: order_management");
+    }
 
-    header("Location: /management/order_management");
+    private function insertOneOrderItem($orderId, $mealId, $meal_amount)
+    {
+        $orderItem = new OrderItemModel();
+        $orderItem->setOrderId($orderId);
+        $orderItem->setMealId($mealId);
+        $orderItem->setMealAmount($meal_amount);
+        $orderItem->insert();
+    }
+
+    private function insertOrderItems($orderId, $data)
+    {
+        foreach ($data as $key) {
+            foreach ($key as $value) {
+                $this->insertOneOrderItem($orderId, $value['mealId'], $value['amount']);
+            }
+        }
+    }
+
+    private function insertNewOrder($tableId)
+    {
+        $order = new OrderModel();
+        $order->setTablesId($tableId);
+        $order->setOrderStatus("w realizacji");
+        return $order->insert();
+    }
 }
