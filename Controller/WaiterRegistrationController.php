@@ -34,7 +34,7 @@ class WaiterRegistrationController extends Controller
         if($this->isLoginFree($model->getData()['login']))
         {
             $model->insert();
-            header("Location: waiter_registration");
+            Redirect::redirect("waiter_registration");
         }
         else
         {

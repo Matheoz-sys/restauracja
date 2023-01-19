@@ -4,6 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 include_once __DIR__ . "/config.php";
 include_once __DIR__ . '/Classes/Session.php';
 include_once __DIR__ . '/Classes/Messager.php';
+include_once __DIR__ . '/Classes/Redirect.php';
 include_once __DIR__ . '/Classes/Database.php';
 include_once __DIR__ . '/Classes/Controller.php';
 include_once __DIR__ . "/Functions/StringUtils.php";
