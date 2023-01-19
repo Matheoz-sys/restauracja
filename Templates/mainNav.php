@@ -12,7 +12,7 @@
     <ul>
         <li><a href="/restauracja/management/tables_management_overview">Edycja stolików</a></li>
         <li><a href="/restauracja/management/dishes_management">Edycja dań</a></li>
-        <li><a href="">Rejestracja kelnerów</a></li>
+        <li><a href="/restauracja/management/waiter_registration">Rejestracja kelnerów</a></li>
         <!-- <li><a href=""></a></li>
         <li><a href=""></a></li> -->
     </ul>

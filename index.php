@@ -85,6 +85,12 @@ switch ($uri) {
         $controller->execute();
         break;
 
+    case '/management/waiter_registration':
+        require_once __DIR__ . '/Controller/WaiterRegistrationController.php';
+        $controller = new WaiterRegistrationController('management/waiter_registration.php');
+        $controller->execute();
+        break;
+
     default:
         http_response_code(404);
         require_once __DIR__ . '/views/404.php';
