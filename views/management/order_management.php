@@ -35,5 +35,4 @@
         <?php endforeach ?>
     </ul>
 </div>
-
-<script src="../dev/js/order_list.js"></script>
+<script src="/restauracja/views/js/order_list.js"></script>
