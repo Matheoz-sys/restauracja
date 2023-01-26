@@ -37,7 +37,7 @@ class NewOrderController extends Controller
         $orderId = $this->insertNewOrder($_GET['id']);
         $this->insertOrderItems($orderId, $data);
 
-        header("Location: order_management");
+        Redirect::redirect("order_management");
     }
 
     private function insertOneOrderItem($orderId, $mealId, $meal_amount)

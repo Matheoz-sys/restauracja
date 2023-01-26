@@ -25,7 +25,7 @@ class OrderManagementController extends Controller
         {
             $id = $_POST['delete-order'];
             $this->deleteOrder($id);
-            header("Location: order_management");
+            Redirect::redirect("order_management");
         }
     }
 

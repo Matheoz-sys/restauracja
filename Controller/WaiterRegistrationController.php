@@ -34,6 +34,7 @@ class WaiterRegistrationController extends Controller
         if($this->isLoginFree($model->getData()['login']))
         {
             $model->insert();
+            Messager::addConfirmation("Nowy kelner dodany");
             Redirect::redirect("waiter_registration");
         }
         else

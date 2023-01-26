@@ -21,8 +21,7 @@ class DishEditController extends Controller
 
         if($_POST['delete']){
             $dish->delete();
-            header("Location: dishes_management");
-            exit();
+            Redirect::redirect("dishes_management");
         }
 
         if ($this->isDishSet())
@@ -33,9 +32,7 @@ class DishEditController extends Controller
         if($dish->valuesChanged()){
             $dish->update();
             Messager::addConfirmation("Danie zaktualizowane");
-
-            header("Location: dish_edit?id=" . $_GET['id']);
-            exit();
+            Redirect::redirect("dish_edit?id=" . $_GET['id']);
         }
         else{
             Messager::addNotice("Brak danych do zaktualizowania");

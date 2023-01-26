@@ -16,7 +16,7 @@ class NewDishController extends Controller
             if($this->isDishValid($dish)){
                 $this->insertDishToDatabase($dish);
                 Messager::addConfirmation("Dodano nowe danie");
-                header("Location: new_dish");
+                Redirect::redirect("new_dish");
             }
         }
     }
