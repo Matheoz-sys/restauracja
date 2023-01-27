@@ -122,8 +122,10 @@ aside {
     flex-grow: 1;
 }
 
-.main-container > *:not(:last-child) {
+.main-container > * {
     padding: 1rem;
+}
+.main-container > *:not(:last-child) {
     border-bottom: 1px solid var(--bs-gray);
 }
 
