@@ -16,8 +16,7 @@ class NewTableController extends Controller
             $table->setTableNumber($_POST['table_number']);
             $table->setPlacesCount($_POST['places_count']);
             $table->insert();
-            header("Location: new_table");
-            exit();
+            Redirect::redirect("new_table");
         }
     }
 
@@ -39,7 +38,7 @@ class NewTableController extends Controller
         global $controller;
 
         if (!$this->tableNumberValid())
-            $controller->addError("table_number", "Istnieje już stolik o takim numerze.");
+            $controller->addError("table_number", "Istnieje już stolik o numerze " . $_POST['table_number'] . ".");
 
         if (!$this->placesCountValid())
             $controller->addError("places_count", "Należy przypisać co najmniej jedno miejsce do stolika.");

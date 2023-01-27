@@ -8,12 +8,15 @@ include_once __DIR__ . '/Classes/Redirect.php';
 include_once __DIR__ . '/Classes/Database.php';
 include_once __DIR__ . '/Classes/Controller.php';
 include_once __DIR__ . "/Functions/StringUtils.php";
+include_once __DIR__ . '/Routes/AJAXRoutes.php';
 
 $request = $_SERVER['REQUEST_URI'];
 
-
 $uri = cutOutUriOnly($request);
 $uri = str_replace("/restauracja", "", $uri);
+
+if (str_starts_with($uri, '/addPersonToTable')) return addPersonToTable($uri);
+if (str_starts_with($uri, '/removePersonFromTable')) return removePersonFromTable($uri);
 
 switch ($uri) {
 
@@ -93,6 +96,7 @@ switch ($uri) {
         break;
 
     default:
+
         http_response_code(404);
         require_once __DIR__ . '/views/404.php';
         break;

@@ -72,6 +72,12 @@ a.button {
     cursor: pointer;
     transition: 0.3s;
 }
+button.blocked,
+.button.blocked {
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: grey;
+}
 
 button:hover,
 a.button:hover {
@@ -116,7 +122,7 @@ aside {
     flex-grow: 1;
 }
 
-.main-container > * {
+.main-container > *:not(:last-child) {
     padding: 1rem;
     border-bottom: 1px solid var(--bs-gray);
 }

@@ -60,7 +60,7 @@ class TableEditController extends Controller
     private function dataCorrect($tableData)
     {
         if (!$this->tableNumberValid($tableData))
-            $this->addError("table_number", "Istnieje już stolik o takim numerze.");
+            $this->addError("table_number", "Istnieje już stolik o numerze " . $_POST['table_number'] . ".");
 
         if (!$this->tablePlacesValid())
             $this->addError("places_count", "Należy przypisać co najmniej jedno miejsce do stolika.");

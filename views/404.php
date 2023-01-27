@@ -1,0 +1,1 @@
+Coś poszło nie tak, wróc do strony głównej: <a href="localhost/restauracja">Strona główna</a>

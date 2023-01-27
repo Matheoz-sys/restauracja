@@ -62,7 +62,7 @@ class DishEditController extends Controller
             $this->addError("dish_ingredient", "Składniki nie przesłany w formularzu.");
         }
         if (!isset($_POST['Description'])) {
-            $this->addError("dish_description", "Opis stolika nie przesłany w formularzu.");
+            $this->addError("dish_description", "Opis dania nie przesłany w formularzu.");
         }
         return $this->noErrorsOccured();
     }

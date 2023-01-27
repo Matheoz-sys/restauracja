@@ -9,6 +9,10 @@ class TablesManagementOverviewController extends Controller
 
         $tables = TableModel::findAll();
 
+        uasort($tables, function ($a, $b) {
+            return $a['table_number'] > $b['table_number'] ? 1 : 0;
+        });
+
         $this->setTemplateData($tables, 'tables');
     }
 }

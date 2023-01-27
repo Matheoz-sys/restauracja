@@ -5,9 +5,15 @@ class TablesOverviewController extends Controller
 {
     protected function process()
     {
-        $this->setBodyClass("body");
-        $tables = TableModel::findAll();
-        $this->setTemplateData($tables, 'tables');
         $this->setSiteTitle("Wybór stolików");
+        $this->setPageTitle("Wybór stolików");
+
+        $tables = TableModel::findAll();
+
+        uasort($tables, function ($a, $b) {
+            return $a['table_number'] > $b['table_number'] ? 1 : 0;
+        });
+
+        $this->setTemplateData($tables, 'tables');
     }
 }
