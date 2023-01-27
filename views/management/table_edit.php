@@ -14,12 +14,12 @@
             </tr>
         </table>
     </form>
-    <form action="" method="POST">
-        <table>
-            <input type="hidden" name="delete" value="delete">
-            <tr>
-                <td colspan="2"><button type="submit">Usuń stolik</button></td>
-            </tr>
-        </table>
+    <form action="" method="POST"></form>
+    <table>
+        <input type="hidden" name="delete" value="delete">
+        <tr>
+            <td colspan="2"><button type="submit">Usuń stolik</button></td>
+        </tr>
+    </table>
     </form>
 </div>

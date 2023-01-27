@@ -1,4 +1,7 @@
 <div class="tables">
+    <?php if (empty($tables)) : ?>
+        <h2>Brak stolików do obsługi!</h2>
+    <?php endif; ?>
     <?php foreach ($tables as $table) : ?>
         <?php extract($table) ?>
         <?php $isOccupiedClass = $table['is_occupied'] == 1 ? " is_occupied" : ""; ?>

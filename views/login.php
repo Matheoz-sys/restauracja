@@ -13,5 +13,6 @@
         <br>
         <button type="accept">Zaloguj</button>
     </form>
+    <br>
     <div>INFO: Jeśli zapomniałeś hasła, a jesteś administratorem, wpisz: admin / admin</div>
 </div>

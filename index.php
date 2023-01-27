@@ -18,6 +18,7 @@ $uri = str_replace("/restauracja", "", $uri);
 
 if (str_starts_with($uri, '/addPersonToTable')) return addPersonToTable($uri);
 if (str_starts_with($uri, '/removePersonFromTable')) return removePersonFromTable($uri);
+if (str_contains($uri, '/logIn') && isLoggedIn()) Redirect::redirect("/restauracja");
 if (str_starts_with($uri, '/logIn')) {
     require_once __DIR__ . '/Controller/LoginController.php';
     $controller = new LoginController("/login.php");
