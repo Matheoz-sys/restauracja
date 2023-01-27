@@ -8,6 +8,7 @@ include_once __DIR__ . '/Classes/Redirect.php';
 include_once __DIR__ . '/Classes/Database.php';
 include_once __DIR__ . '/Classes/Controller.php';
 include_once __DIR__ . "/Functions/StringUtils.php";
+include_once __DIR__ . "/Functions/CookieFunctions.php";
 include_once __DIR__ . '/Routes/AJAXRoutes.php';
 
 $request = $_SERVER['REQUEST_URI'];
@@ -17,6 +18,16 @@ $uri = str_replace("/restauracja", "", $uri);
 
 if (str_starts_with($uri, '/addPersonToTable')) return addPersonToTable($uri);
 if (str_starts_with($uri, '/removePersonFromTable')) return removePersonFromTable($uri);
+if (str_starts_with($uri, '/logIn')) {
+    require_once __DIR__ . '/Controller/LoginController.php';
+    $controller = new LoginController("/login.php");
+    $controller->execute();
+    return;
+}
+
+if (!isLoggedIn()) {
+    Redirect::redirect("/restauracja/logIn");
+}
 
 switch ($uri) {
 

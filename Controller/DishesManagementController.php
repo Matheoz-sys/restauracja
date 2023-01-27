@@ -7,6 +7,7 @@ class DishesManagementController extends Controller
     protected function process()
     {
         $this->setSiteTitle("Dania");
+        $this->setPageTitle("Edycja Dań");
 
         $categories = DishCategoryModel::findAll();
         $meals = DishModel::findAll();

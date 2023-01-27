@@ -74,7 +74,7 @@ abstract class Model
     public static function findBy($column, $value): array
     {
         $dbTableName = static::getTableName();
-        $query = "SELECT * FROM $dbTableName WHERE `$column`=$value";
+        $query = "SELECT * FROM $dbTableName WHERE `$column`=\"$value\"";
         $queryResult = mysqli_query(Database::connect(), $query);
         $results = mysqli_fetch_all($queryResult, MYSQLI_ASSOC);
         return $results;
@@ -83,7 +83,7 @@ abstract class Model
     public static function findOneBy($column, $value): self
     {
         $dbTableName = static::getTableName();
-        $query = "SELECT * FROM $dbTableName WHERE `$column`=$value LIMIT 1";
+        $query = "SELECT * FROM $dbTableName WHERE `$column`=\"$value\" LIMIT 1";
         $queryResult = mysqli_query(Database::connect(), $query);
         $result = mysqli_fetch_assoc($queryResult);
 

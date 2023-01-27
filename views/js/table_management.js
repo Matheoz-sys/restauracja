@@ -3,7 +3,6 @@ let order = document.querySelector(".order-button");
 console.log(order);
 
 function changeButtonState() {
-    console.log(occupiedPlaces.innerText);
     switch (occupiedPlaces.innerText) {
         case 0:
         case "0":

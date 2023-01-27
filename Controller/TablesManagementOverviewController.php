@@ -4,8 +4,8 @@ class TablesManagementOverviewController extends Controller
 {
     protected function process()
     {
-        $this->setPageTitle("Wybierz obsługiwany stolik");
-        $this->setSiteTitle("Wybór stolików");
+        $this->setSiteTitle("Edycja stolików");
+        $this->setPageTitle("Edycja stolików");
 
         $tables = TableModel::findAll();
 
