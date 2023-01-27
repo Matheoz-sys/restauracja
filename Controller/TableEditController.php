@@ -1,6 +1,8 @@
 <?php
 
 include_once(__DIR__ . '/../Models/TableModel.php');
+include_once(__DIR__ . '/../Models/OrderModel.php');
+include_once(__DIR__ . '/../Models/OrderItemModel.php');
 class TableEditController extends Controller
 {
     protected function process()
@@ -18,8 +20,21 @@ class TableEditController extends Controller
 
     private function processPost(TableModel $table)
     {
-
         if (empty($_POST)) return;
+
+        if (!empty($_POST['delete'])) {
+            $orders = OrderModel::findBy("tables_id", $table->getData()['id']);
+            foreach ($orders as $order) {
+                $ordersItems = OrderItemModel::findBy("order_id", $order['id']);
+                foreach ($ordersItems as $orderItem) {
+                    OrderItemModel::findById($orderItem['id'])->delete();
+                }
+                OrderModel::findById($order['id'])->delete();
+            }
+            Messager::addConfirmation("Pomyślnie usunięto stolik nr: " . $table->getData()['table_number']);
+            $table->delete();
+            Redirect::redirect("tables_management_overview");
+        }
 
         if ($this->dataAvailable() && $this->dataCorrect($table->getData())) {
             $table->setTableNumber($_POST['table_number']);

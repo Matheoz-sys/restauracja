@@ -1,4 +1,5 @@
 let occupiedPlaces = document.querySelector(".occupiedPlaces");
+let tableOccupiedText = document.querySelector(".table-occupied");
 let order = document.querySelector(".order-button");
 console.log(order);
 
@@ -8,10 +9,12 @@ function changeButtonState() {
         case "0":
             console.log("0?");
             order.classList.add("blocked");
+            tableOccupiedText.innerText = "wolny";
             order.setAttribute("disabled", true);
             break;
         default:
             order.classList.remove("blocked");
+            tableOccupiedText.innerText = "zajęty";
             order.setAttribute("disabled", false);
     }
 }

@@ -1,1 +1,0 @@
-<script src="/dev/js/dumper.js"></script>

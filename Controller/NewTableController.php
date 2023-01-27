@@ -16,7 +16,8 @@ class NewTableController extends Controller
             $table->setTableNumber($_POST['table_number']);
             $table->setPlacesCount($_POST['places_count']);
             $table->insert();
-            Redirect::redirect("new_table");
+            Messager::addConfirmation("Pomyślnie dodano stolik nr. " . $table->getData()['table_number'] . " o ilości miejsc: " . $table->getData()['places_count']);
+            Redirect::redirect("tables_management_overview");
         }
     }
 

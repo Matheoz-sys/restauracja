@@ -75,8 +75,6 @@ class Messager
             self::$messages[$type][] = $text;
         }
 
-        // dump(self::$messages);
-
         Session::getInstance()->saveData(self::class, self::$messages);
     }
 

@@ -10,7 +10,6 @@ abstract class Controller
     public function __construct($view)
     {
         $this->view = $view;
-        $this->scripts[] = "globalScripts";
     }
 
     protected function setTemplateData($data, $name)
@@ -68,6 +67,7 @@ abstract class Controller
 
     private function insertScripts()
     {
+        if (empty($this->scripts)) return;
         foreach ($this->scripts as $fileName) {
             include_once __DIR__ . "/../templates/$fileName.php";
         }

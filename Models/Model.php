@@ -59,7 +59,7 @@ abstract class Model
             throw new Error("Nie można edytować ID");
 
         if (!in_array($name, $this->availableMagicMethods))
-            throw new Error(dump($this) . "Brak takiego settera.");
+            throw new Error("Brak takiego settera.");
     }
 
     public static function findAll(): array
@@ -106,7 +106,7 @@ abstract class Model
 
     public function update(): bool
     {
-        if (is_null($this->dataArr['id'])) throw new Error(dump($this->dataArr) . "Nie można zaktualizować nieistniejącego rekordu");
+        if (is_null($this->dataArr['id'])) throw new Error("Nie można zaktualizować nieistniejącego rekordu");
 
         $tableName = static::getTableName();
         $query = "UPDATE `$tableName` SET " . self::createUpdateString($this->changedValues) . " WHERE `id` = " . $this->dataArr['id'];
@@ -132,7 +132,7 @@ abstract class Model
 
     public function insert()
     {
-        if (!is_null($this->dataArr['id'])) throw new Error(dump($this->dataArr) . "Nie można wstawić istniejącego rekordu - id musi byc null");
+        if (!is_null($this->dataArr['id'])) throw new Error("Nie można wstawić istniejącego rekordu - id musi byc null");
 
         $tableName = static::getTableName();
         $query = "INSERT INTO `$tableName` " . self::createInsertString($this->dataArr);
@@ -156,7 +156,7 @@ abstract class Model
 
     public function delete()
     {
-        if (is_null($this->dataArr['id'])) throw new Error(dump($this->dataArr) . "Nie można usunąć nieistniejącego rekordu - id nie moze byc null");
+        if (is_null($this->dataArr['id'])) throw new Error("Nie można usunąć nieistniejącego rekordu - id nie moze byc null");
 
         $id = $this->dataArr['id'];
         $dbTableName = static::getTableName();
